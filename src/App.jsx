@@ -4,6 +4,8 @@ const text = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis inv
 
 const App = () => {
   const [inputText, setInputText] = useState('')
+  const [isStarted, setIsStarted] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(60)
   const textareaRef = useRef(null)
 
   useEffect(() => {
@@ -12,7 +14,19 @@ const App = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!timeLeft || !isStarted) return
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+    console.log(isStarted)
+    return () => clearInterval(intervalId)
+  }, [timeLeft, isStarted])
+
   const handleInputChange = (e) => {
+    if(!isStarted) {
+      setIsStarted(true)
+    }
     setInputText(e.target.value)
   }
 
@@ -42,6 +56,7 @@ const App = () => {
       <textarea ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
         opacity: 0, height: 0, border: 'none', padding: 0, outline: 'none'
       }} />
+      <p>{timeLeft}</p>
     </div>
   )
 }
