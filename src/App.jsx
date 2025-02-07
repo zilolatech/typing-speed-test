@@ -6,6 +6,12 @@ const App = () => {
   const [inputText, setInputText] = useState('')
   const [isStarted, setIsStarted] = useState(false)
   const [timeLeft, setTimeLeft] = useState(60)
+
+  const [accuracy, setAccuracy] = useState(0)
+  const [cpm, setCPM] = useState(0)
+  const [wpm, setWPM] = useState(0)
+  const [typedChar, serTypedChar] = useState(0)
+
   const textareaRef = useRef(null)
 
   useEffect(() => {
@@ -18,8 +24,7 @@ const App = () => {
     if (!timeLeft || !isStarted) return
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
-    }, 1000);
-    console.log(isStarted)
+    }, 1000)
     return () => clearInterval(intervalId)
   }, [timeLeft, isStarted])
 
@@ -28,6 +33,11 @@ const App = () => {
       setIsStarted(true)
     }
     setInputText(e.target.value)
+    serTypedChar(inputText.length+1)
+    if (timeLeft > 0) {
+      setCPM(typedChar)
+      setWPM(Math.round(typedChar/5))
+    }
   }
 
   const renderText = () => {
@@ -56,7 +66,11 @@ const App = () => {
       <textarea ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
         opacity: 0, height: 0, border: 'none', padding: 0, outline: 'none'
       }} />
-      <p>{timeLeft}</p>
+      <div className='flex'>
+        <p className='text-2xl m-10'>WPM: {wpm}</p>
+        <p className='text-2xl m-10'>CPM: {cpm}</p>
+        <p className='text-2xl m-10'>{timeLeft}</p>
+      </div>
     </div>
   )
 }
