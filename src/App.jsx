@@ -6,8 +6,7 @@ const App = () => {
   const [inputText, setInputText] = useState('')
   const [isStarted, setIsStarted] = useState(false)
   const [timeLeft, setTimeLeft] = useState(60)
-
-  const [accuracy, setAccuracy] = useState(0)
+  const [accuracy, setAccuracy] = useState(100)
   const [cpm, setCPM] = useState(0)
   const [wpm, setWPM] = useState(0)
   const [typedChar, serTypedChar] = useState(0)
@@ -18,7 +17,8 @@ const App = () => {
     if (textareaRef.current) { 
       textareaRef.current.focus()
     }
-  }, [])
+    calculateAccuracy()
+  }, [inputText])
 
   useEffect(() => {
     if (!timeLeft || !isStarted) return
@@ -38,6 +38,17 @@ const App = () => {
       setCPM(typedChar)
       setWPM(Math.round(typedChar/5))
     }
+  }
+
+  const calculateAccuracy = () => {
+    let correctChars = 0
+     for (let i = 0; i < inputText.length; i++) {
+      if (inputText[i] === text[i]) {
+        correctChars++
+      }
+     }
+     const newAccuracy = (Math.round((correctChars / inputText.length) * 100))
+     setAccuracy(newAccuracy)
   }
 
   const renderText = () => {
@@ -69,7 +80,8 @@ const App = () => {
       <div className='flex'>
         <p className='text-2xl m-10'>WPM: {wpm}</p>
         <p className='text-2xl m-10'>CPM: {cpm}</p>
-        <p className='text-2xl m-10'>{timeLeft}</p>
+        <p className='text-2xl m-10'>Time: {timeLeft}</p>
+        <p className='text-2xl m-10'>Accuracy: {accuracy}</p>
       </div>
     </div>
   )
