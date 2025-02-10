@@ -16,8 +16,10 @@ const App = () => {
   useEffect(() => {
     if (textareaRef.current) { 
       textareaRef.current.focus()
-    }
-    calculateAccuracy()
+    } 
+    if (isStarted && timeLeft) {
+      calculateAccuracy()
+    }  
   }, [inputText])
 
   useEffect(() => {
