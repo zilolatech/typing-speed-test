@@ -74,18 +74,33 @@ const App = () => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen fixed inset-0 mx-56'>
-      <p className='text-xl'>{renderText()}</p>
-      <textarea ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
-        opacity: 0, height: 0, border: 'none', padding: 0, outline: 'none'
-      }} />
-      <div className='flex'>
-        <p className='text-2xl m-10'>WPM: {wpm}</p>
-        <p className='text-2xl m-10'>CPM: {cpm}</p>
-        <p className='text-2xl m-10'>Time: {timeLeft}</p>
-        <p className='text-2xl m-10'>Accuracy: {accuracy}</p>
+    <>
+      <div className='relative flex flex-col justify-center items-center mt-24'>
+        <div className='flex gap-4'>
+          <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
+            <p className='text-xl'>WPM:</p>
+            <p className='text-3xl'>{wpm}</p>
+          </div>
+          <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
+            <p className='text-xl'>CPM:</p>
+            <p className='text-3xl'>{cpm}</p>
+          </div>
+          <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
+            <p className='text-xl'>Accuracy(%):</p>
+            <p className='text-3xl'>{accuracy}</p>
+          </div>
+        </div>
+        <div className='border border-black border-t-4 border-b-0 rounded-t-full w-48 h-24 text-center mt-6'>
+          <p className='text-2xl mt-12'>Time: {timeLeft}</p>
+        </div>
       </div>
-    </div>
+      <div className='flex flex-col items-center justify-center h-screen fixed inset-0 mx-56'>
+        <p className='text-xl'>{renderText()}</p>
+        <textarea ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
+          opacity: 0, height: 0, border: 'none', padding: 0, outline: 'none'
+        }} />      
+      </div>
+    </>
   )
 }
 
