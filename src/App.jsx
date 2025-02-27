@@ -39,6 +39,8 @@ const App = () => {
     if (timeLeft > 0) {
       setCPM(typedChar)
       setWPM(Math.round(typedChar/5))
+    } else {
+      alert("Time's up!")
     }
   }
 
@@ -75,7 +77,7 @@ const App = () => {
 
   return (
     <>
-      <div className='relative flex flex-col justify-center items-center mt-24'>
+      <div className='relative flex flex-col justify-center items-center mt-10 md:mt-24'>
         <div className='flex gap-4'>
           <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
             <p className='text-xl'>WPM:</p>
@@ -94,7 +96,7 @@ const App = () => {
           <p className='text-2xl mt-12'>Time: {timeLeft}</p>
         </div>
       </div>
-      <div className='flex flex-col items-center justify-center h-screen fixed inset-0 mx-56'>
+      <div className='flex flex-col items-center justify-center md:h-screen md:fixed md:inset-0 mx-4 mt-12 md:mt-0 md:mx-56'>
         <p className='text-xl'>{renderText()}</p>
         <textarea ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
           opacity: 0, height: 0, border: 'none', padding: 0, outline: 'none'
