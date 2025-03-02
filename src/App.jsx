@@ -98,8 +98,8 @@ const App = () => {
       </div>
       <div className='flex flex-col items-center justify-center md:h-screen md:fixed md:inset-0 mx-4 mt-12 md:mt-0 md:mx-56'>
         <p className='text-xl'>{renderText()}</p>
-        <textarea ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
-          opacity: 0, height: 0, border: 'none', padding: 0, outline: 'none'
+        <input ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
+          opacity: 0, height: '10vh', border: 'none', padding: 0, outline: 'none'
         }} />      
       </div>
     </>
