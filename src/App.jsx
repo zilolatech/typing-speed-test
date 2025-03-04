@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Results from './components/Results'
 
 const text = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis inventore laudantium, debitis architecto ipsa placeat quia. Nobis aliquid eos sed provident nulla. Ducimus exercitationem, doloribus nesciunt earum laudantium quasi perspiciatis.'
 
