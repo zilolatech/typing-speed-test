@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Results from './components/Results'
 
 const text = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis inventore laudantium, debitis architecto ipsa placeat quia. Nobis aliquid eos sed provident nulla. Ducimus exercitationem, doloribus nesciunt earum laudantium quasi perspiciatis.'
 
@@ -78,29 +79,32 @@ const App = () => {
   return (
     <>
       <div className='relative flex flex-col justify-center items-center mt-10 md:mt-24'>
-        <div className='flex gap-4'>
-          <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
-            <p className='text-xl'>WPM:</p>
-            <p className='text-3xl'>{wpm}</p>
+        <div className={`${!timeLeft && 'popup-effect'}`}>
+          <div className='flex gap-4'>
+            <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
+              <p className='text-xl'>WPM:</p>
+              <p className='text-3xl'>{wpm}</p>
+            </div>
+            <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
+              <p className='text-xl'>CPM:</p>
+              <p className='text-3xl'>{cpm}</p>
+            </div>
+            <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
+              <p className='text-xl'>Accuracy(%):</p>
+              <p className='text-3xl'>{accuracy}</p>
+            </div>
           </div>
-          <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
-            <p className='text-xl'>CPM:</p>
-            <p className='text-3xl'>{cpm}</p>
+          <div className='border border-black border-t-4 border-b-0 rounded-t-full w-48 h-24 text-center mt-6 m-auto'>
+            <p className='text-2xl mt-12'>Time: {timeLeft}</p>
           </div>
-          <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
-            <p className='text-xl'>Accuracy(%):</p>
-            <p className='text-3xl'>{accuracy}</p>
-          </div>
-        </div>
-        <div className='border border-black border-t-4 border-b-0 rounded-t-full w-48 h-24 text-center mt-6'>
-          <p className='text-2xl mt-12'>Time: {timeLeft}</p>
         </div>
       </div>
       <div className='flex flex-col items-center justify-center md:h-screen md:fixed md:inset-0 mx-4 mt-12 md:mt-0 md:mx-56'>
-        <p className='text-xl'>{renderText()}</p>
+        <p className={`text-xl ${!timeLeft && 'blur-effect'}`}>{renderText()}</p>
         <input ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
           opacity: 0, height: '10vh', border: 'none', padding: 0, outline: 'none'
-        }} />      
+        }} /> 
+ 
       </div>
     </>
   )
