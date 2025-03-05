@@ -75,6 +75,15 @@ const App = () => {
     })
   }
 
+  const restart = () => {
+    setInputText('')
+    setIsStarted(false)
+    setTimeLeft(60)
+    setAccuracy(100)
+    setCPM(0)
+    setWPM(0)
+  }
+
   return (
     <>
       <div className={`relative flex flex-col justify-center items-center pt-10 md:pt-24 md:pb-72 ${!timeLeft && 'md:bg-gray-50'}`}>
@@ -96,6 +105,12 @@ const App = () => {
           <div className='border border-black border-t-4 border-b-0 rounded-t-full w-48 h-24 text-center mt-6 m-auto'>
             <p className='text-2xl mt-12'>Time: {timeLeft}</p>
           </div>
+          {!timeLeft && (
+            <div className='float-right my-3 p-1 bg-gray-400 border-gray-400 rounded'>
+              <button onClick={restart} className='text-white'>Restart</button>
+            </div>
+          )}
+
         </div>
       </div>
       <div className='flex flex-col items-center justify-center md:h-screen md:fixed md:inset-0 mx-4 mt-12 md:mt-0 md:mx-56'>
