@@ -77,7 +77,7 @@ const App = () => {
 
   return (
     <>
-      <div className='relative flex flex-col justify-center items-center mt-10 md:mt-24'>
+      <div className={`relative flex flex-col justify-center items-center pt-10 md:pt-24 md:pb-72 ${!timeLeft && 'md:bg-gray-50'}`}>
         <div className={`${!timeLeft && 'popup-effect'}`}>
           <div className='flex gap-4'>
             <div className='text-2xl flex flex-col items-center p-4 border-2 rounded flex-1'>
