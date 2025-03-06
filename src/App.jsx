@@ -19,8 +19,11 @@ const App = () => {
     } 
     if (isStarted && timeLeft) {
       calculateAccuracy()
-    }  
-  }, [inputText])
+    }
+    if (!timeLeft && textareaRef.current) {
+      textareaRef.current.blur()
+    }
+  }, [inputText, timeLeft, isStarted])
 
   useEffect(() => {
     if (!timeLeft || !isStarted) return
@@ -39,8 +42,6 @@ const App = () => {
     if (timeLeft > 0) {
       setCPM(typedChar)
       setWPM(Math.round(typedChar/5))
-    } else {
-      alert("Time's up!")
     }
   }
 
@@ -106,7 +107,7 @@ const App = () => {
             <p className='text-2xl mt-12'>Time: {timeLeft}</p>
           </div>
           {!timeLeft && (
-            <div className='float-right my-3 p-1 bg-gray-400 border-gray-400 rounded'>
+            <div className='w-80 md:w-min md:float-right my-8 md:my-3 m-auto p-1 bg-gray-400 border-gray-400 rounded text-center'>
               <button onClick={restart} className='text-white'>Restart</button>
             </div>
           )}
@@ -117,7 +118,7 @@ const App = () => {
         <p className={`text-xl ${!timeLeft && 'blur-effect'}`}>{renderText()}</p>
         <input ref={textareaRef} value={inputText} onChange={handleInputChange} style={{
           opacity: 0, height: '10vh', border: 'none', padding: 0, outline: 'none'
-        }} /> 
+        }} className={`${!timeLeft && 'pointer-events-none'}`} /> 
  
       </div>
     </>
